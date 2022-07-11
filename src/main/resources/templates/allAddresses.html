@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Students</title>
+</head>
+<body>
+<table class = "table table-dark">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">studentId</th>
+        <th scope="col">studentName</th>
+        <th scope="col">county</th>
+        <th scope="col">city</th>
+        <th scope="col">homeAddress</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="a : ${allAddresses}">
+        <td th:text="${a.addressId}"></td>
+        <td th:text="${a.student.sid}"></td>
+        <td th:text="${a.student.slastname}"></td>
+        <td th:text="${a.county}"></td>
+        <td th:text="${a.city}"></td>
+        <td th:text="${a.homeAddress}"></td>
+    </tr>
+    </tbody>
+
+
+</table>
+
+</body>
+</html>
