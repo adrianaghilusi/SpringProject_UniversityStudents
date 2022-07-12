@@ -27,8 +27,26 @@ public class StudentService {
             studentRepository.saveAndFlush(s);
         }
     }
+    public Student createStudent(Student student){
+        return studentRepository.save(student);
+    }
 
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
+    }
+
+    public Student updateStudent(StudentDTO student, Integer studId) {
+        var stud = studentRepository.getById(studId);
+        var conv = convertDTOtoModel(student);
+        if(!student.email.isEmpty())
+            stud.setEmail(student.email);
+        if(!student.phone.isEmpty())
+            stud.setPhone(student.phone);
+        if(!student.sfirstname.isEmpty())
+            stud.setSfirstname(student.sfirstname);
+        if(!student.slastname.isEmpty())
+            stud.setSlastname(student.slastname);
+        return studentRepository.save(stud);
+
     }
 }

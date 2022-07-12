@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Component
 public class MockDataRepo {
-    public static final Integer numberOfEntities = 75;
+    public static final Integer numberOfEntities = 5;
     public List<Student> initStudents(){
         List<Student> studentList =  new ArrayList<>();
         for(int i=1; i< numberOfEntities; i++){
