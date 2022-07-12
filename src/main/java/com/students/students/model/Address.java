@@ -20,7 +20,7 @@ public class Address {
 public Integer addressId;
 public String homeAddress;
 public String county;
-@OneToOne
+@OneToOne (cascade = CascadeType.REMOVE)
 @JoinColumn(name="sid",referencedColumnName = "sid")
 public Student student;
 public String city;

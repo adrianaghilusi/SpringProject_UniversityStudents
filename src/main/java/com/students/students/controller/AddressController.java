@@ -33,4 +33,10 @@ public class AddressController {
         Address address1  = addressService.updateAddress(address,addId);
         return "redirect:/addresses";
     }
+
+    @RequestMapping(value = "/deleteAddress/{id}", method = RequestMethod.DELETE)
+    public String deleteAddress(Model model, @RequestBody AddressDTO address, @PathVariable(name = "id") Integer addId) throws Exception {
+        addressService.deleteAddress(address,addId);
+        return "redirect:/addresses";
+    }
 }

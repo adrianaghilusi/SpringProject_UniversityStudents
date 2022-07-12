@@ -43,4 +43,11 @@ public class StudentController {
         return "redirect:/students";
     }
 
+    @RequestMapping(value ="/deleteStudent/{id}", method = RequestMethod.DELETE)
+    public String deleteStudent(Model model, @RequestBody StudentDTO studentDTO, @PathVariable (value = "id") Integer studId)
+    {
+
+        studentService.deleteStudent(studentDTO,studId);
+        return "redirect:/students";
+    }
 }

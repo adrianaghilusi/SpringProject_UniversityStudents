@@ -5,6 +5,7 @@ import com.students.students.model.Address;
 import com.students.students.model.Student;
 import com.students.students.repository.AddressRepository;
 import com.students.students.repository.StudentRepository;
+import org.hibernate.annotations.Cascade;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,5 +55,10 @@ private final StudentRepository studentRepository;
             whichAddress.setStudent(s);
         }
         return addressRepository.save(whichAddress);
+    }
+    public void deleteAddress(AddressDTO address, Integer addId) {
+        var adds = addressRepository.getById(addId);
+        addressRepository.delete(adds);
+
     }
 }

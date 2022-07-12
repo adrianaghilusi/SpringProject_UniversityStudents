@@ -2,16 +2,21 @@ package com.students.students.service;
 
 import com.students.students.dto.StudentDTO;
 import com.students.students.model.Student;
+import com.students.students.repository.AddressRepository;
 import com.students.students.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+
 @Service
 public class StudentService {
     private final StudentRepository studentRepository;
+    private final AddressRepository addressRepository;
 
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository, AddressRepository addressRepository) {
         this.studentRepository = studentRepository;
+        this.addressRepository = addressRepository;
     }
     public Student convertDTOtoModel(StudentDTO studentDTO){
         if(studentDTO!=null){
@@ -48,5 +53,17 @@ public class StudentService {
             stud.setSlastname(student.slastname);
         return studentRepository.save(stud);
 
+    }
+
+    public void deleteStudent(StudentDTO studentDTO, Integer studId) {
+        var stud = studentRepository.getById(studId);
+       var adds = addressRepository.findAll();
+       for(var a: adds){
+           if(Objects.equals(a.getStudent().getSid(), studId)){
+               addressRepository.delete(a);
+               break;
+           }
+       }
+        studentRepository.delete(stud);
     }
 }
