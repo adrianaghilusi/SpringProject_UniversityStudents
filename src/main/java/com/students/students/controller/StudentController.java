@@ -70,4 +70,16 @@ public class StudentController {
         model.addAttribute("allStudents",studentService.getStudentsByName(firstname));
         return "../templates/allStudents";
     }
+    @RequestMapping(value ="/students/grades", method = RequestMethod.GET)
+    public String getStudentsByGradeSorted(Model model)
+    {
+        model.addAttribute("allStudents",studentService.getStudentsGradesSorted());
+        return "../templates/allStudents";
+    }
+    @RequestMapping(value ="/students/gradesCustom", method = RequestMethod.GET)
+    public String getStudentsByGradeSorted2(Model model)
+    {
+        model.addAttribute("allStudents",studentService.getStudentsGradesSortedCustom());
+        return "../templates/allStudents";
+    }
 }

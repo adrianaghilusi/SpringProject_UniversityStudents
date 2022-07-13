@@ -21,10 +21,13 @@ public class Student {
  public String slastname;
  public String email;
  public String phone;
- public Student(String sfirstname, String slastname, String email, String phone ){
+
+ public Double grade;
+ public Student(String sfirstname, String slastname, String email, String phone, Double grade ){
   this.sfirstname=sfirstname;
   this.slastname = slastname;
   this.email = email;
   this.phone = phone;
+  this.grade = grade;
  }
 }

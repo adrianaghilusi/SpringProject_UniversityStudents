@@ -6,6 +6,8 @@ import com.students.students.repository.AddressRepository;
 import com.students.students.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,13 +22,13 @@ public class StudentService {
     }
     public Student convertDTOtoModel(StudentDTO studentDTO){
         if(studentDTO!=null){
-            return new Student(studentDTO.getSfirstname(), studentDTO.getSlastname(),studentDTO.getEmail(),studentDTO.getPhone());
+            return new Student(studentDTO.getSfirstname(), studentDTO.getSlastname(),studentDTO.getEmail(),studentDTO.getPhone(), studentDTO.getGrade());
         }
         return null;
     }
     public StudentDTO convertModelToDTO(Student student){
         if(student!=null){
-            return new StudentDTO(student.getSfirstname(), student.getSlastname(),student.getEmail(),student.getPhone(),student.getSid());
+            return new StudentDTO(student.getSfirstname(), student.getSlastname(),student.getEmail(),student.getPhone(),student.getSid(), student.getGrade());
         }
         return null;
     }
@@ -79,6 +81,16 @@ public class StudentService {
 
     public List<StudentDTO> getStudentsByName(String firstname){
         List<Student> students = studentRepository.getStudentsBySfirstnameContains(firstname);
+        return students.stream().map(this::convertModelToDTO).toList();
+    }
+    public List<StudentDTO> getStudentsGradesSorted(){
+        List<Student> students = studentRepository.findByOrderByGradeAsc();
+        return students.stream().map(this::convertModelToDTO).toList();
+    }
+
+    public List<StudentDTO> getStudentsGradesSortedCustom() {
+        var students = studentRepository.findAll();
+        students.sort(Comparator.comparing(Student::getGrade));
         return students.stream().map(this::convertModelToDTO).toList();
     }
 }

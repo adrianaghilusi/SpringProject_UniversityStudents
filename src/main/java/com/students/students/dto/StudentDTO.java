@@ -13,6 +13,7 @@ public class StudentDTO {
     private String email;
     private String phone;
     private Integer sid;
+    private Double grade;
 
 
 }
