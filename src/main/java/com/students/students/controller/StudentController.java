@@ -5,10 +5,13 @@ import com.students.students.dto.StudentDTO;
 import com.students.students.model.Student;
 import com.students.students.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.awt.*;
 import java.util.List;
 
 @Controller
@@ -32,14 +35,25 @@ public class StudentController {
         model.addAttribute("allStudents",studentService.getAllStudents() );
         return "../templates/allStudents";
     }
-    @RequestMapping(value = "/addStudent", method = RequestMethod.POST)
-    public String createStudent(Model model, @RequestBody Student student){
+    @RequestMapping(value = "/addStudent", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String createStudent( Student student){
         Student stud  = studentService.createStudent(student);
         return "redirect:/students";
+
     }
-    @RequestMapping(value = "/updateStudent/{id}", method = RequestMethod.PUT)
-    public String updateStudent(Model model, @RequestBody StudentDTO student, @PathVariable (value = "id") Integer studId){
-        Student stud  = studentService.updateStudent(student,studId);
+    @RequestMapping(value = "/addStudent", method = RequestMethod.GET)
+    public String addStudent(){
+        return "../templates/addStudent";
+    }
+    @RequestMapping(value = "/updateStudent/{id}", method = RequestMethod.GET)
+    public ModelAndView getUpdateStudent(@PathVariable (value = "id") Integer studId){
+        Student stud  = studentService.getById(studId);
+        ModelAndView modelAndView = new ModelAndView("../templates/updateStudent").addObject("student", stud);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/updateStudent", method = RequestMethod.POST,consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String updateStudent(Model model,StudentDTO student){
+        Student stud  = studentService.updateStudent(student, student.getSid());
         return "redirect:/students";
     }
 

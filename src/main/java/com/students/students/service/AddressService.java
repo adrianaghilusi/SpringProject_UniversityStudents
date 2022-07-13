@@ -21,7 +21,7 @@ private final StudentRepository studentRepository;
         this.studentRepository = studentRepository;
     }
     public Address convertDTOtoModel(AddressDTO addressDTO){
-        return new Address(addressDTO.homeAddress,addressDTO.county, addressDTO.city);
+        return new Address(addressDTO.getHomeAddress(),addressDTO.getCounty(), addressDTO.getCity());
     }
     public Address createAddress(AddressDTO address) throws Exception {
         Optional<Student> studentOptional = studentRepository.findById(address.getSid());
@@ -39,7 +39,11 @@ private final StudentRepository studentRepository;
 
     public Address updateAddress(AddressDTO address, Integer addId) throws Exception {
         var addConv = convertDTOtoModel(address);
-        var whichAddress = addressRepository.getById(addId);
+        System.out.println(addId);
+        var optAddress = addressRepository.findById(addId);
+        Address whichAddress = new Address();
+        if(optAddress.isPresent())
+            whichAddress = optAddress.get();
         if(!addConv.getHomeAddress().isEmpty())
             whichAddress.setHomeAddress(addConv.homeAddress);
         if(!addConv.getCity().isEmpty())
@@ -60,5 +64,9 @@ private final StudentRepository studentRepository;
         var adds = addressRepository.getById(addId);
         addressRepository.delete(adds);
 
+    }
+
+    public Address getById(Integer studId) {
+        return addressRepository.getById(studId);
     }
 }

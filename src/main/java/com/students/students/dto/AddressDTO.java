@@ -2,15 +2,13 @@ package com.students.students.dto;
 
 import com.students.students.model.Student;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
 public class AddressDTO {
-public String homeAddress;
-public String county;
-public String city;
-public Integer sid;
+private Integer addressId;
+private String homeAddress;
+private String county;
+private Integer sid;
+private String city;
 }

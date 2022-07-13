@@ -20,7 +20,7 @@ public class StudentService {
     }
     public Student convertDTOtoModel(StudentDTO studentDTO){
         if(studentDTO!=null){
-            return new Student(studentDTO.sfirstname, studentDTO.slastname,studentDTO.email,studentDTO.phone);
+            return new Student(studentDTO.getSfirstname(), studentDTO.getSlastname(),studentDTO.getEmail(),studentDTO.getPhone());
         }
         return null;
     }
@@ -43,14 +43,14 @@ public class StudentService {
     public Student updateStudent(StudentDTO student, Integer studId) {
         var stud = studentRepository.getById(studId);
         var conv = convertDTOtoModel(student);
-        if(!student.email.isEmpty())
-            stud.setEmail(student.email);
-        if(!student.phone.isEmpty())
-            stud.setPhone(student.phone);
-        if(!student.sfirstname.isEmpty())
-            stud.setSfirstname(student.sfirstname);
-        if(!student.slastname.isEmpty())
-            stud.setSlastname(student.slastname);
+        if(!student.getEmail().isEmpty())
+            stud.setEmail(student.getEmail());
+        if(!student.getPhone().isEmpty())
+            stud.setPhone(student.getPhone());
+        if(!student.getSfirstname().isEmpty())
+            stud.setSfirstname(student.getSfirstname());
+        if(!student.getSlastname().isEmpty())
+            stud.setSlastname(student.getSlastname());
         return studentRepository.save(stud);
 
     }
@@ -65,5 +65,9 @@ public class StudentService {
            }
        }
         studentRepository.delete(stud);
+    }
+
+    public Student getById(Integer id){
+        return studentRepository.getById(id);
     }
 }

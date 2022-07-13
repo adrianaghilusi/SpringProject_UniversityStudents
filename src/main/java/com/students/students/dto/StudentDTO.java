@@ -1,15 +1,17 @@
 package com.students.students.dto;
 
-public class StudentDTO {
-    public String sfirstname;
-    public String slastname;
-    public String email;
-    public String phone;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    public StudentDTO(String sfirstname, String slastname, String email, String phone) {
-        this.sfirstname = sfirstname;
-        this.slastname = slastname;
-        this.email = email;
-        this.phone = phone;
-    }
+
+@Data
+public class StudentDTO {
+    private String sfirstname;
+    private String slastname;
+    private String email;
+    private String phone;
+    private Integer sid;
+
+
 }
