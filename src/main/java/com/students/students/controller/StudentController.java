@@ -64,4 +64,10 @@ public class StudentController {
         studentService.deleteStudent(studentDTO,studId);
         return "redirect:/students";
     }
+    @RequestMapping(value ="/students/names/{firstname}", method = RequestMethod.GET)
+    public String getStudentsByName(Model model, @PathVariable (value="firstname") String firstname)
+    {
+        model.addAttribute("allStudents",studentService.getStudentsByName(firstname));
+        return "../templates/allStudents";
+    }
 }

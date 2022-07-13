@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 
 @Data
+@AllArgsConstructor
 public class StudentDTO {
     private String sfirstname;
     private String slastname;

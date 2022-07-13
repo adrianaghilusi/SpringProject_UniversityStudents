@@ -24,6 +24,12 @@ public class StudentService {
         }
         return null;
     }
+    public StudentDTO convertModelToDTO(Student student){
+        if(student!=null){
+            return new StudentDTO(student.getSfirstname(), student.getSlastname(),student.getEmail(),student.getPhone(),student.getSid());
+        }
+        return null;
+    }
     public void addStudent(StudentDTO studentToAdd) throws Exception {
         if(studentToAdd == null){
             throw new Exception("Student is null");
@@ -70,4 +76,10 @@ public class StudentService {
     public Student getById(Integer id){
         return studentRepository.getById(id);
     }
+
+    public List<StudentDTO> getStudentsByName(String firstname){
+        List<Student> students = studentRepository.getStudentsBySfirstnameContains(firstname);
+        return students.stream().map(this::convertModelToDTO).toList();
+    }
 }
+
